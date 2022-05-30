@@ -14,6 +14,7 @@
     "start": "node lib/index.js"
   },
   "dependencies": {
+    "pretty-error": "^4.0.0",
     "promised-sqlite3": "^1.2.0",
     "source-map-support": "^0.5.21",
     "sqlite3": "^5.0.8"
