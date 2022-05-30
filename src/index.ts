@@ -13,21 +13,19 @@ import path from 'path'
 const parseArgs = () => {
     try {
         return arg({
-            '--src': String,
-            '--dst': String,
+            '--out': String,
             '--table': [String],
 
             // Aliases
-            '-s': '--src',
-            '-d': '--dst',
+            '-o': '--out',
             '-t': '--table',
         })
     }
     catch {
-        console.log('Options are:\n\n')
-        console.log('       --src, -s:        Folder containing source databases')
-        console.log('       --dst, -d:        Destination file to merge data into')
-        console.log('       --table, -t:      Tables to merge')
+        console.log('Source folder containing databases is required argument')
+        console.log('Optional flags are:')
+        console.log('   --out, -o:        Destination file to merge data into. Defaults to out.sqlite')
+        console.log('   --table, -t:      Tables to merge. Can be used multiple times')
         process.exit(0)
     }
 }
@@ -84,10 +82,10 @@ const generateOutDb = async (fullPath: string, outFile: string) => {
 const main = async () => {
 
     const args = parseArgs()
-    if (!args['--src']) throw new Error('missing required argument: --src')
+    if (!args._[0]) throw new Error('missing required src folder argument')
 
-    const srcFolder = toAbsolutePath(args['--src'])
-    const outFile = toAbsolutePath(args['--dst'] || './out.sqlite')
+    const srcFolder = toAbsolutePath(args._[0])
+    const outFile = toAbsolutePath(args['--out'] || './out.sqlite')
     const onlyCopyTables = args['--table']
 
     const files = await readdir(srcFolder)
