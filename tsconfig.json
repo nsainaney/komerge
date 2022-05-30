@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "outDir": "lib",
+        "rootDir": "src",
+        "composite": true,
+        "declaration": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "lib": ["es2018", "dom", "WebWorker"],
+        "module": "commonjs",
+        "target": "es2020",
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "skipLibCheck": true,
+        "sourceMap": true
+    },
+    "exclude": [
+        "**/*.spec.ts",
+        "**/*.unit.ts",
+        "lib",
+        "node_modules",
+        "spec",
+        "test"
+    ]
+}

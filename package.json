@@ -1,0 +1,26 @@
+{
+  "name": "komerge",
+  "version": "1.0.0",
+  "description": "Merge kobo dbs into one",
+  "main": "lib/index.js",
+  "repository": "git@github.com:nsainaney/komerge.git",
+  "author": "Narayan Sainaney <narayan@sainaney.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "build": "tsc -b",
+    "develop": "tsc -b -w",
+    "clean": "tsc -b --clean",
+    "start": "node lib/index.js"
+  },
+  "dependencies": {
+    "promised-sqlite3": "^1.2.0",
+    "source-map-support": "^0.5.21",
+    "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.36",
+    "@types/sqlite3": "^3.1.8",
+    "pkg": "^5.7.0"
+  }
+}
