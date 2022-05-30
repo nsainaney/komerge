@@ -18,7 +18,10 @@
     "sqlite-merge": "lib/index.js"
   },
   "dependencies": {
+    "@types/glob": "^7.2.0",
     "arg": "^5.0.1",
+    "glob": "^8.0.3",
+    "glob-promise": "^4.2.2",
     "pretty-error": "^4.0.0",
     "promised-sqlite3": "^1.2.0",
     "source-map-support": "^0.5.21"

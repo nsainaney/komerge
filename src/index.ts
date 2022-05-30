@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import 'source-map-support/register.js'
-import { readdir, copyFile, unlink, access } from 'fs/promises'
+import { copyFile, unlink, access } from 'fs/promises'
 import { PromisedDatabase } from 'promised-sqlite3'
+import glob from 'glob-promise'
 import PrettyError from 'pretty-error'
 import arg from 'arg'
 import path from 'path'
@@ -18,11 +19,12 @@ const parseArgs = () => {
 
             // Aliases
             '-o': '--out',
+            '-i': '--ignore',
             '-t': '--table',
         })
     }
     catch {
-        console.log('Source folder containing databases is required argument')
+        console.log('command [flags] <glob> [...ignore patterns]')
         console.log('Optional flags are:')
         console.log('   --out, -o:        Destination file to merge data into. Defaults to out.sqlite')
         console.log('   --table, -t:      Tables to merge. Can be used multiple times')
@@ -82,13 +84,15 @@ const generateOutDb = async (fullPath: string, outFile: string) => {
 const main = async () => {
 
     const args = parseArgs()
-    if (!args._[0]) throw new Error('missing required src folder argument')
+    if (!args._.length) throw new Error('missing required src folder argument')
 
-    const srcFolder = toAbsolutePath(args._[0])
+    const [ src, ...ignore ] = args._
+
+    // const srcFolder = toAbsolutePath(args._[0])
     const outFile = toAbsolutePath(args['--out'] || './out.sqlite')
     const onlyCopyTables = args['--table']
 
-    const files = await readdir(srcFolder)
+    const files = await glob(src, { ignore, nodir: true }) // await readdir(srcFolder)
     let dstDb: PromisedDatabase
     let index = 0
     let fatal
@@ -98,9 +102,9 @@ const main = async () => {
 
     try {
         for(const file of files) {
-            const fullPath = `${srcFolder}/${file}`
+            const fullPath = toAbsolutePath(file)
             const dbName = `db${index++}`
-            console.log(`Processing ${fullPath}`)
+            console.log(`\nProcessing ${fullPath}`)
             try {
                 if (!dstDb) {
                     const result = await generateOutDb(fullPath, outFile)
