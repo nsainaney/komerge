@@ -1,7 +1,7 @@
 {
   "name": "komerge",
   "version": "1.0.0",
-  "description": "Merge kobo dbs into one",
+  "description": "Merge many kobo sqlite dbs into one",
   "main": "lib/index.js",
   "repository": "git@github.com:nsainaney/komerge.git",
   "author": "Narayan Sainaney <narayan@sainaney.com>",
@@ -12,6 +12,9 @@
     "develop": "tsc -b -w",
     "clean": "tsc -b --clean",
     "start": "node lib/index.js"
+  },
+  "bin": {
+    "komerge": "lib/index.js"
   },
   "dependencies": {
     "pretty-error": "^4.0.0",

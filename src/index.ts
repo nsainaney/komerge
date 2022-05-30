@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import 'source-map-support/register.js'
 import { readdir, copyFile, unlink, access } from 'fs/promises'
 import { PromisedDatabase } from 'promised-sqlite3'
@@ -47,7 +48,7 @@ const generateOutDb = async (fullPath) => {
         }
         // Cannot proceed if outFile is a bad sqlite file
         console.error(`${outFile} is not a sqlite database`)
-        const fatal = new Error(`${outFile} failed becase ${err.message}`)
+        const fatal = new Error(`${outFile} failed because ${err.message}`)
         return { fatal }
     }
 }
@@ -98,6 +99,8 @@ const main = async () => {
                 renderError(err)
             }
         }
+
+        await dstDb?.run('VACUUM') // Compact the db
     }
 
     finally {
@@ -109,7 +112,6 @@ const main = async () => {
                 console.log(skip)
         }
     }
-    
 }
 
 main()
