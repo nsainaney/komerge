@@ -8,34 +8,7 @@ package-lock.json
 .idea
 
 # tsc and build output
-packages/**/lib
 tsconfig.tsbuildinfo
-
-# These are the local provisioners cache
-.provisioners/
-
-# Daemon items
-.codezero
-
-# These are generated json schema files
-*.gen.json
-
-# kubeconfig files from DigitalOcean
-*-kubeconfig.yaml
-*-kubeconfig.yml
-
-# parcel cache files
-.cache
-
-# Gets created when servers are run in production and PORT environment is not set
-PORT
-
-# git secrets
-.gitsecret/keys/random_seed
-
-# Secrets should not be checked in
-**/*.secret.*
-!**.secret
 
 # testing stuff
 coverage
@@ -45,19 +18,16 @@ html-report
 # outputs
 lib
 tmp
+dist
 
 # Universal stuff (mac, webstorm, coverage
 *~
 .DS_Store
-/packages/hub/server/src/services/payments/config.ts
-/packages/hub/server/src/services/revenue/config.ts
-/depends/
 
 **/*.d.ts
 
 **/yarn-audit*
 **/yarn-deprecations*
-**/bin/*
 
 samples
 out.sqlite

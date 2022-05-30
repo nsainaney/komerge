@@ -1,7 +1,7 @@
 {
   "name": "sqlite-merge",
   "version": "1.0.0",
-  "description": "Merge many kobo sqlite dbs into one",
+  "description": "Merge many sqlite dbs into one",
   "main": "lib/index.js",
   "repository": "git@github.com:nsainaney/sqlite-merge.git",
   "author": "Narayan Sainaney <narayan@sainaney.com>",
@@ -11,7 +11,8 @@
     "build": "tsc -b",
     "develop": "tsc -b -w",
     "clean": "tsc -b --clean",
-    "start": "node lib/index.js"
+    "start": "node lib/index.js",
+    "bundle": "yarn build && ./bundle.sh"
   },
   "bin": {
     "sqlite-merge": "lib/index.js"
@@ -20,12 +21,10 @@
     "arg": "^5.0.1",
     "pretty-error": "^4.0.0",
     "promised-sqlite3": "^1.2.0",
-    "source-map-support": "^0.5.21",
-    "sqlite3": "^5.0.8"
+    "source-map-support": "^0.5.21"
   },
   "devDependencies": {
     "@types/node": "^17.0.36",
-    "@types/sqlite3": "^3.1.8",
-    "pkg": "^5.7.0"
+    "@types/sqlite3": "^3.1.8"
   }
 }
