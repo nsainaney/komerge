@@ -136,6 +136,8 @@ const main = async () => {
                     await dstDb.run(copyCmd)
                 }
 
+                await dstDb.run(`DETACH DATABASE ${dbName}`)
+
                 success++
             }
             catch(err) {
